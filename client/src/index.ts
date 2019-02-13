@@ -9,7 +9,7 @@ const gridOptions: GridOptions = {
         {headerName: 'Row Index', valueGetter: (params) => {
             return params.node.rowIndex;
         }},
-        {field: 'athlete'},
+        {field: 'athlete', filter: 'text'},
         {field: 'country', rowGroup: true, hide: true},
         {field: 'sport', rowGroup: true, hide: true},
         {field: 'year', filter: 'number', filterParams: {newRowsAction: 'keep'}},
@@ -19,12 +19,15 @@ const gridOptions: GridOptions = {
     ],
 
     defaultColDef: {
-        sortable: true
+        sortable: true,
+        enableValue: true,
+        enablePivot: true,
+        enableRowGroup: true
     },
     sideBar: 'columns',
     rowModelType: 'serverSide',
-    // cacheBlockSize: 30,
-    // maxBlocksInCache: 2,
+    cacheBlockSize: 50,
+    maxBlocksInCache: 3,
     // maxConcurrentDatasourceRequests: 2,
     // blockLoadDebounceMillis: 1000
 };
