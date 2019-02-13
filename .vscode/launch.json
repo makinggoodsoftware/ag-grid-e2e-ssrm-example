@@ -5,12 +5,6 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Attach to brain-lib server",
-            "type": "node",
-            "request": "attach",
-            "port": 12345
-        },
-        {
             "name": "Current TS File",
             "type": "node",
             "request": "launch",
