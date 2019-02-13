@@ -6,6 +6,9 @@ import "ag-grid-community/dist/styles/ag-theme-balham.css";
 
 const gridOptions: GridOptions = {
     columnDefs: [
+        {headerName: 'Row Index', valueGetter: (params) => {
+            return params.node.rowIndex;
+        }},
         {field: 'athlete'},
         {field: 'country', rowGroup: true, hide: true},
         {field: 'sport', rowGroup: true, hide: true},
@@ -18,10 +21,10 @@ const gridOptions: GridOptions = {
     defaultColDef: {
         sortable: true
     },
-
+    sideBar: 'columns',
     rowModelType: 'serverSide',
-    // cacheBlockSize: 20,
-    // maxBlocksInCache: 3,
+    // cacheBlockSize: 30,
+    // maxBlocksInCache: 2,
     // maxConcurrentDatasourceRequests: 2,
     // blockLoadDebounceMillis: 1000
 };
