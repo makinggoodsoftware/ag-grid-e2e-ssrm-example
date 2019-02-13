@@ -4,35 +4,38 @@
   "description": "A simple demo app showing how to perform server-side operations using ag-Grid with node.js and MySQL.",
   "main": "index.js",
   "scripts": {
-    "start": "babel-node ./server/server.js",
-    "dev": "nodemon --exec babel-node ./server/server.js --inspect=12345"
+    "start": "NODE_ENV=production node ./dist/server.js",
+    "dev": "NODE_ENV=development ./node_modules/.bin/nodemon --exec ./node_modules/.bin/ts-node ./server/server.ts --inspect=12345",
+    "buildServer": "./node_modules/.bin/tsc",
+    "buildClient": "./node_modules/.bin/webpack --config webpack.config.prod.js",
+    "build": "yarn buildServer && yarn buildClient"
   },
   "keywords": [],
-  "author": "Robert Clarke",
+  "author": "Robin Denton",
   "license": "MIT",
   "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-eslint": "^8.2.1",
-    "babel-jest": "^22.1.0",
-    "babel-loader": "^6.0.2",
-    "babel-plugin-transform-object-rest-spread": "^6.26.0",
-    "babel-preset-env": "^1.6.1",
-    "babel-register": "^6.26.0",
+    "@types/body-parser": "^1.17.0",
+    "@types/express": "^4.16.1",
+    "@types/mysql": "^2.15.5",
     "css-loader": "^0.28.9",
-    "html-webpack-plugin": "^2.30.1",
+    "html-webpack-plugin": "3.2.0",
     "node-sass": "^4.7.2",
     "nodemon": "^1.18.10",
     "sass-loader": "^6.0.6",
     "style-loader": "^0.20.1",
-    "webpack": "^3.11.0",
-    "webpack-dev-middleware": "^2.0.5",
-    "webpack-livereload-plugin": "^1.0.0"
+    "ts-node": "^8.0.2",
+    "typescript": "^3.3.3",
+    "webpack": "4",
+    "webpack-cli": "^3.2.3",
+    "webpack-dev-middleware": "^3.5.2",
+    "webpack-livereload-plugin": "^2.2.0",
+    "awesome-typescript-loader": "^5.2.1"
   },
   "dependencies": {
     "ag-grid-community": "^20.0.0",
     "ag-grid-enterprise": "^20.0.0",
-    "express": "^4.16.2",
     "body-parser": "^1.18.3",
+    "express": "^4.16.2",
     "mysql": "2.16.0"
   },
   "repository": {

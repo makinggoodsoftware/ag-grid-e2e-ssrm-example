@@ -1,18 +1,16 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const LiveReloadPlugin = require('webpack-livereload-plugin');
 const path = require('path');
 
 const DIST = path.resolve(__dirname, './dist/public');
 
 module.exports = {
   context: __dirname,
-  mode: 'development',
+  mode: 'production',
   entry: path.resolve(__dirname, './client/src/index.ts'),
   output: {
     path: DIST,
-    filename: 'bundle.js'
+    filename: '[name].bundle.js'
   },
-  devtool: 'source-map',
   module: {
     rules: [
       {
@@ -46,8 +44,7 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: 'client/index.html'
-    }),
-    new LiveReloadPlugin()
+    })
   ]
 };
 

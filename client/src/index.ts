@@ -1,10 +1,10 @@
-import {Grid} from 'ag-grid-community';
+import {Grid, GridOptions} from 'ag-grid-community';
 import 'ag-grid-enterprise';
 
 import "ag-grid-community/dist/styles/ag-grid.css";
 import "ag-grid-community/dist/styles/ag-theme-balham.css";
 
-const gridOptions = {
+const gridOptions: GridOptions = {
     columnDefs: [
         {field: 'athlete'},
         {field: 'country', rowGroup: true, hide: true},
@@ -20,16 +20,13 @@ const gridOptions = {
     },
 
     rowModelType: 'serverSide',
-
-    // debug: true,
     // cacheBlockSize: 20,
     // maxBlocksInCache: 3,
-    // purgeClosedRowNodes: true,
     // maxConcurrentDatasourceRequests: 2,
     // blockLoadDebounceMillis: 1000
 };
 
-const gridDiv = document.querySelector('#myGrid');
+const gridDiv = document.querySelector('#myGrid') as HTMLElement;
 new Grid(gridDiv, gridOptions);
 
 const datasource = {
