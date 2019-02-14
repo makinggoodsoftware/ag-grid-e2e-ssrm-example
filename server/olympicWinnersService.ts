@@ -11,12 +11,13 @@ class OlympicWinnersService {
     getData(request, resultsCallback) {
 
         const SQL = this.buildSql(request);
+        
 
         connection.query(SQL, (error, results) => {
             const rowCount = this.getRowCount(request, results);
             const resultsForPage = this.cutResultsToPageSize(request, results);
 
-            resultsCallback(resultsForPage, rowCount);
+            resultsCallback(resultsForPage, rowCount, SQL);
         });
     }
 

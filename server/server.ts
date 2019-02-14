@@ -19,8 +19,8 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
 app.post('/olympicWinners', function (req: Request, res: Response) {
-    OlympicWinnersService.getData(req.body, (rows: any[], lastRow: number) => {
-        res.json({rows: rows, lastRow: lastRow});
+    OlympicWinnersService.getData(req.body, (rows: any[], lastRow: number, query: string) => {
+        res.json({rows: rows, lastRow: lastRow, query: query});
     });
 });
 

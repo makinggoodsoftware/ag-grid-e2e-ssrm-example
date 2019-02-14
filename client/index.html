@@ -1,15 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <style>
-        html, body {
-            height: 99%;
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+        }
+
+        #container {
+            height: 100%;
+        }
+
+        h2 {
+            font-size: 16px;
+            font-family: 'Courier New', Courier, monospace;
+            color: white;
+            margin: 0;
+            margin-bottom: 5px;
+        }
+
+        pre {
+            overflow-y: auto;
+            margin: 0;
+            height: calc(100% - 18px);
+        }
+
+        #serverConsole {
+            background-color: black;
+            color: yellow;
+            height: 30%;
+            font-size: 16px;
+            padding: 10px;
+        }
+
+        #requestInfo {
+            width: 20%;
+            float: left;
+            height: 100%;
+        }
+
+        #responseInfo {
+            width: 80%;
+            float: left;
+            height: 100%;
         }
     </style>
 </head>
 
 <body>
-    <div id="myGrid" class="ag-theme-balham" style="height: 100%"></div>
+    <div id="container">
+    <div id="myGrid" class="ag-theme-balham" style="height: 70%"></div>
+    <div id="serverConsole">
+        <div id="requestInfo">
+            <h2>REQUEST</h2>
+        <pre></pre>
+</div>
+<div id="responseInfo">
+    <h2>RESPONSE</h2>
+<pre>
+</pre>
+</div> 
+    </div>
+</div>
 </body>
 
 </html>

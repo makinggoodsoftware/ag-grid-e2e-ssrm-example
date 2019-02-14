@@ -35,6 +35,17 @@ const gridOptions: GridOptions = {
 const gridDiv = document.querySelector('#myGrid') as HTMLElement;
 new Grid(gridDiv, gridOptions);
 
+function populateConsole(request, response) {
+    const requestConsole = document.querySelector('#requestInfo pre');
+    const responseConsole = document.querySelector('#responseInfo pre');
+
+    const requestText = JSON.stringify(request, null, 1).replace(',', '\n');
+    const responseText = JSON.stringify(response, null, 1);
+
+    requestConsole.innerHTML = requestText;
+    responseConsole.innerHTML = responseText;
+}
+
 const datasource = {
     getRows(params) {
          console.log(JSON.stringify(params.request, null, 1));
@@ -46,7 +57,8 @@ const datasource = {
          })
          .then(httpResponse => httpResponse.json())
          .then(response => {
-             params.successCallback(response.rows, response.lastRow);
+            populateConsole(params.request, response);
+            params.successCallback(response.rows, response.lastRow);
          })
          .catch(error => {
              console.error(error);
