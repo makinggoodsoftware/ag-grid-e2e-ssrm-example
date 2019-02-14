@@ -16,9 +16,11 @@ You will need to have mySQL shell installed on your machine.
 
 [https://dev.mysql.com/downloads/shell/](https://dev.mysql.com/downloads/shell/)
 
-Or alternatively, you can use homebrew.
+Or alternatively (and for an easier setup), you can use homebrew.
 
 [https://brew.sh/](https://brew.sh/)
+
+`brew install mysql`
 
 ## Usage
 
@@ -67,7 +69,7 @@ The repository comes with a preconfigured debug configuration for VSCode. You ca
 
 The debugger will run `~/server/server.ts` using nodemon and ts-node.
 
-On the even you change a file, the task will rebuild both server and client. The debugger should remain attached.
+On the event you change a file, the task will rebuild both server and client. The debugger should remain attached.
 
 This will allow you to set breakpoints on the server-side Typescript in VSCode.
 

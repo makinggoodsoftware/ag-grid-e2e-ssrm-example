@@ -5,10 +5,10 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Current TS File",
+            "name": "Launch ag-grid-ssrm-example",
             "type": "node",
             "request": "launch",
-            "args": ["${relativeFile}"],
+            "args": ["${workspaceRoot}/server/server.ts"],
             "runtimeArgs": ["--nolazy", "-r", "ts-node/register"],
             "sourceMaps": true,
             "cwd": "${workspaceRoot}",
