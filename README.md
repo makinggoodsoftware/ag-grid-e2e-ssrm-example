@@ -6,7 +6,6 @@
 This Demo uses **NodeJS + Express, mySQL and Typescript** to perform server-side operations. It implements many of ag-Grid's features, including:
 
 - Row Grouping
-- Pivot
 - Aggregation
 - Filter
 - Sorting
