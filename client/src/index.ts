@@ -11,8 +11,8 @@ const gridOptions: GridOptions = {
         }},
         {field: 'athlete', filter: 'text'},
         {field: 'country', rowGroup: true, hide: true},
-        {field: 'sport', rowGroup: true, hide: true},
-        {field: 'year', filter: 'number', filterParams: {newRowsAction: 'keep'}},
+        {field: 'sport', rowGroup: true, hide: true, pivot: true},
+        {field: 'year', filter: 'number', filterParams: {newRowsAction: 'keep'}, pivot: true},
         {field: 'gold', aggFunc: 'sum'},
         {field: 'silver', aggFunc: 'sum'},
         {field: 'bronze', aggFunc: 'sum'},
@@ -30,6 +30,7 @@ const gridOptions: GridOptions = {
     maxBlocksInCache: 3,
     // maxConcurrentDatasourceRequests: 2,
     // blockLoadDebounceMillis: 1000
+    pivotMode: true,
 };
 
 const gridDiv = document.querySelector('#myGrid') as HTMLElement;
