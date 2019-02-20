@@ -21,7 +21,7 @@ const gridOptions: GridOptions = {
     defaultColDef: {
         sortable: true,
         enableValue: true,
-        enablePivot: true,
+        enablePivot: false,
         enableRowGroup: true
     },
     sideBar: 'columns',
