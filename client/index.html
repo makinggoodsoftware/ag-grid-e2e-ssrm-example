@@ -12,6 +12,17 @@
 
         #container {
             height: 100%;
+            font-size: 16px;
+        }
+
+        #myGrid {
+            height: 60%;
+        }
+
+        #serverConsole {
+            background-color: black;
+            height: 40%;
+            font-size: 16px;
         }
 
         h2 {
@@ -24,47 +35,65 @@
 
         pre {
             overflow-y: auto;
-            margin: 0;
-            height: calc(100% - 18px);
-        }
-
-        #serverConsole {
-            background-color: black;
             color: yellow;
-            height: 30%;
-            font-size: 16px;
+            margin: 0;
+        } 
+
+        #queryInfo {
+            width: 100%;
+            border-bottom: 1px solid white;
             padding: 10px;
+            background-color: black;
+            box-sizing: border-box;
+            height: 80px;
+        } 
+
+        #queryInfo pre {
+            height: 36px;
         }
 
         #requestInfo {
-            width: 20%;
+            width: 30%;
             float: left;
-            height: 100%;
+            box-sizing: border-box;
+            padding: 10px;
+            max-height: calc(100% - 80px);
+            display: flex;
+            flex-flow: column;
+            border-right: 1px solid white;
         }
 
         #responseInfo {
-            width: 80%;
+            width: 70%;
             float: left;
-            height: 100%;
+            box-sizing: border-box;
+            padding: 10px;
+            max-height: calc(100% - 80px);
+            display: flex;
+            flex-flow: column;
         }
+
     </style>
 </head>
 
 <body>
     <div id="container">
-    <div id="myGrid" class="ag-theme-balham" style="height: 70%"></div>
-    <div id="serverConsole">
-        <div id="requestInfo">
-            <h2>REQUEST</h2>
-        <pre></pre>
-</div>
-<div id="responseInfo">
-    <h2>RESPONSE</h2>
-<pre>
-</pre>
-</div> 
+        <div id="myGrid" class="ag-theme-balham"></div>
+        <div id="serverConsole">
+            <div id="queryInfo">
+                <h2>QUERY INFO: </h2>
+                <pre></pre>
+            </div>
+            <div id="requestInfo">
+                <h2>REQUEST PARAMETERS</h2>
+                <pre></pre>
+            </div>
+            <div id="responseInfo">
+                <h2>RESPONSE DATA</h2>
+                <pre></pre>
+            </div> 
+        </div>
     </div>
-</div>
 </body>
 
 </html>

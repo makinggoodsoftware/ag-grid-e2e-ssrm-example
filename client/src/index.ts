@@ -36,14 +36,17 @@ const gridDiv = document.querySelector('#myGrid') as HTMLElement;
 new Grid(gridDiv, gridOptions);
 
 function populateConsole(request, response) {
+    const queryConsole = document.querySelector('#queryInfo pre');
     const requestConsole = document.querySelector('#requestInfo pre');
     const responseConsole = document.querySelector('#responseInfo pre');
 
     const requestText = JSON.stringify(request, null, 1).replace(',', '\n');
     const responseText = JSON.stringify(response, null, 1);
+    const queryText = JSON.stringify(response.query, null, 1).replace('"', '');
 
     requestConsole.innerHTML = requestText;
     responseConsole.innerHTML = responseText;
+    queryConsole.innerHTML = queryText;
 }
 
 const datasource = {
