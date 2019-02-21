@@ -8,6 +8,9 @@ module.exports = {
   context: __dirname,
   mode: 'development',
   entry: path.resolve(__dirname, './client/src/index.ts'),
+  resolve: {
+    extensions: ['.js', '.ts']
+  },
   output: {
     path: DIST,
     filename: 'bundle.js'
