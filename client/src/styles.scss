@@ -1,0 +1,97 @@
+html,
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+#container {
+    height: 100%;
+    font-size: 16px;
+}
+
+#myGrid {
+    height: 60%;
+}
+
+#serverConsole {
+    background-color: black;
+    height: 40%;
+    font-size: 16px;
+}
+
+h2 {
+    font-size: 16px;
+    font-family: 'Courier New', Courier, monospace;
+    color: white;
+    margin: 0;
+    margin-bottom: 5px;
+}
+
+pre {
+    overflow-y: auto;
+    color: yellow;
+    margin: 0;
+}
+
+.window {
+    box-sizing: border-box;
+    padding: 10px;
+} 
+
+.window p {
+    color: yellow;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+#descriptionInfo {
+    grid-column-start: 1;
+    grid-column-end: 3;
+}
+
+#queryInfo {
+    grid-column-start: 1;
+    grid-column-end: 3;
+    border-bottom: 1px solid white;
+    padding: 10px;
+    background-color: black;
+} 
+
+#queryInfo pre {
+    height: 36px;
+}
+
+#requestInfo {
+    overflow: hidden;
+    box-sizing: border-box;
+    border-right: 1px solid white;
+    display: flex;
+    flex-direction: column;
+}
+
+#responseInfo {
+    box-sizing: border-box;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+#requestInfo pre, #responseInfo pre {
+    flex: 1;
+}
+
+#rightPanel {
+    height: 100%;
+    width: 80%;
+    float: left;
+    display: grid;
+    grid-template: 90px 80px auto / 30% 70%;
+}
+
+#leftPanel {
+    width: 20%;
+    float: left;
+    height: 100%;
+    border-right: 1px solid white;
+    box-sizing: border-box;
+}

@@ -3,8 +3,15 @@ import * as mysql from 'mysql';
 const connection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    password: 'rootadmin123'
+    password: 'password'
 });
+
+connection.connect((err) => {
+    if(err) {
+        throw err;
+    }
+    console.log('db connection established');
+})
 
 class OlympicWinnersService {
 

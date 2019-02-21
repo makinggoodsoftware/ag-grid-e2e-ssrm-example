@@ -2,96 +2,33 @@
 <html lang="en">
 
 <head>
-    <style>
-        html,
-        body {
-            margin: 0;
-            padding: 0;
-            height: 100%;
-        }
-
-        #container {
-            height: 100%;
-            font-size: 16px;
-        }
-
-        #myGrid {
-            height: 60%;
-        }
-
-        #serverConsole {
-            background-color: black;
-            height: 40%;
-            font-size: 16px;
-        }
-
-        h2 {
-            font-size: 16px;
-            font-family: 'Courier New', Courier, monospace;
-            color: white;
-            margin: 0;
-            margin-bottom: 5px;
-        }
-
-        pre {
-            overflow-y: auto;
-            color: yellow;
-            margin: 0;
-        } 
-
-        #queryInfo {
-            width: 100%;
-            border-bottom: 1px solid white;
-            padding: 10px;
-            background-color: black;
-            box-sizing: border-box;
-            height: 80px;
-        } 
-
-        #queryInfo pre {
-            height: 36px;
-        }
-
-        #requestInfo {
-            width: 30%;
-            float: left;
-            box-sizing: border-box;
-            padding: 10px;
-            max-height: calc(100% - 80px);
-            display: flex;
-            flex-flow: column;
-            border-right: 1px solid white;
-        }
-
-        #responseInfo {
-            width: 70%;
-            float: left;
-            box-sizing: border-box;
-            padding: 10px;
-            max-height: calc(100% - 80px);
-            display: flex;
-            flex-flow: column;
-        }
-
-    </style>
 </head>
 
 <body>
     <div id="container">
         <div id="myGrid" class="ag-theme-balham"></div>
         <div id="serverConsole">
-            <div id="queryInfo">
-                <h2>QUERY INFO: </h2>
-                <pre></pre>
+            <div id="leftPanel">
+
             </div>
-            <div id="requestInfo">
-                <h2>REQUEST PARAMETERS</h2>
-                <pre></pre>
+            <div id="rightPanel">
+                <div class= "window" id="descriptionInfo">
+                    <h2>DESCRIPTION:</h2>
+                    <p>Loading rows: 0 to 100</p>
+                </div>
+                <div class= "window" id="queryInfo">
+                    <h2>QUERY INFO: </h2>
+                    <pre></pre>
+                </div>
+                <div class= "window" id="requestInfo">
+                    <h2>REQUEST PARAMETERS</h2>
+                    <pre></pre>
+                </div>
+                <div class= "window" id="responseInfo">
+                    <h2>RESPONSE DATA</h2>
+                    <pre></pre>
+                </div> 
             </div>
-            <div id="responseInfo">
-                <h2>RESPONSE DATA</h2>
-                <pre></pre>
-            </div> 
         </div>
     </div>
 </body>

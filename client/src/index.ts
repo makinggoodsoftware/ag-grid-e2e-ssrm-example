@@ -1,4 +1,5 @@
 import {Grid, GridOptions} from 'ag-grid-community';
+import "./styles.scss";
 import 'ag-grid-enterprise';
 
 import "ag-grid-community/dist/styles/ag-grid.css";
