@@ -4,12 +4,13 @@ import "./styles/styles.scss";
 import "ag-grid-community/dist/styles/ag-grid.css";
 import "ag-grid-community/dist/styles/ag-theme-balham.css";
 import { DataService } from './services/DataService';
-import { TerminalManager } from './TerminalManager';
+import { TerminalManager, HistoryItem, DescriptionType } from './TerminalManager';
 
 export class ServerGrid {
     private gridOptions: GridOptions = {};
     private dataService: DataService;
     private terminal: TerminalManager;
+    private lastEvent: DescriptionType;
 
     constructor(selector: string) {
         this.dataService = new DataService(this.processRequestCb.bind(this));
@@ -39,7 +40,28 @@ export class ServerGrid {
             cacheBlockSize: 50,
             maxBlocksInCache: 3,
             // maxConcurrentDatasourceRequests: 2,
-            // blockLoadDebounceMillis: 1000
+            // blockLoadDebounceMillis: 1000,
+            onSortChanged: (params) => {
+                this.lastEvent = DescriptionType.Sort;
+            },
+            onFilterChanged: (params) => {
+                this.lastEvent = DescriptionType.Filter;
+            },
+            onColumnRowGroupChanged: (params) => {
+                this.lastEvent = DescriptionType.GroupChanged;
+            },
+            onRowGroupOpened: (params) => {
+                this.lastEvent = DescriptionType.GroupOpened;
+            },
+            onColumnValueChanged: (params) => {
+                this.lastEvent = DescriptionType.Aggregation;
+            },
+            onColumnPivotModeChanged: (params) => {
+                this.lastEvent = DescriptionType.Pivot;
+            },
+            onColumnPivotChanged: (params) => {
+                this.lastEvent = DescriptionType.PivotLabel;
+            }
         };
     }
 
@@ -59,6 +81,12 @@ export class ServerGrid {
     }
 
     private processRequestCb(request: IServerSideGetRowsRequest, response: any) {
-        this.terminal.pushRequest(request, response);
+        const item: HistoryItem = {
+            request,
+            response,
+            descriptionType: this.lastEvent || DescriptionType.Scroll
+        };
+        this.terminal.pushItem(item);
+        this.lastEvent = null;
     }
 }

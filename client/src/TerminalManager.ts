@@ -1,44 +1,66 @@
 import { IServerSideGetRowsRequest } from "ag-grid-community";
 
+export interface HistoryItem {
+    request: IServerSideGetRowsRequest,
+    response: any,
+    descriptionType: DescriptionType
+}
+
+export enum DescriptionType {
+    Scroll = "Scroll",
+    Sort = "Sort Changed",
+    Filter = "Filter Changed",
+    GroupChanged = "Row Group Changed",
+    GroupOpened = "Row Group Opened",
+    Aggregation = "Aggregation Changed",
+    Pivot = "Pivot On/Off",
+    PivotLabel = "Pivot Column Changed"
+}
+
 export class TerminalManager {
-    private history: any[] = [];
 
-    constructor() {}
+    private history: HistoryItem[] = [];
 
-    public pushRequest(request: IServerSideGetRowsRequest, response: any) {
-        this.history.push({request, response});
+    // UI Console Elements
+    private historyViewport: HTMLElement;
+    private descriptionEl: HTMLElement;
+    private queryEl: HTMLElement;
+    private requestEl: HTMLElement;
+    private responseEl: HTMLElement;
 
-        const index = this.history.length - 1;
-        this.addHistoryButton(this.history[index], index);
+    constructor() {
+        this.historyViewport = document.querySelector('.button-viewport');
+        this.descriptionEl = document.querySelector('#descriptionInfo p');
+        this.queryEl = document.querySelector('#queryInfo pre');
+        this.requestEl = document.querySelector('#requestInfo pre');
+        this.responseEl = document.querySelector('#responseInfo pre');
     }
 
-    private addHistoryButton(historyItem: any, index: number) {
+    public pushItem(item: HistoryItem) {
+        this.addHistoryButton(item);
+    }
+
+    private addHistoryButton(item: HistoryItem) {
         const btn = document.createElement('button');
-        btn.innerText = index.toString();
+        btn.innerText = item.descriptionType;
         btn.classList.add('new');
 
         btn.addEventListener('click', () => {
             btn.classList.remove('new');
-            this.populateTerminal(historyItem);
+            this.populateTerminal(item);
         });
 
-        const btnVp = document.querySelector('.button-viewport');
-        btnVp.prepend(btn);
+        this.historyViewport.prepend(btn);
     }
 
-    private populateTerminal(historyItem: any) {
-        const { request, response } = historyItem;
+    private populateTerminal(item: HistoryItem) {
+        this.descriptionEl.innerText = this.getDescription(item.request, item.descriptionType);
+        this.queryEl.innerText = JSON.stringify(item.response.query, null, 1).replace('"', '');
+        this.requestEl.innerText = JSON.stringify(item.request, null, 1).replace(',', '\n');
+        this.responseEl.innerText = JSON.stringify(item.response, null, 1);
+    }
 
-        const queryConsole = document.querySelector('#queryInfo pre');
-        const requestConsole = document.querySelector('#requestInfo pre');
-        const responseConsole = document.querySelector('#responseInfo pre');
-
-        const requestText = JSON.stringify(request, null, 1).replace(',', '\n');
-        const responseText = JSON.stringify(response, null, 1);
-        const queryText = JSON.stringify(response.query, null, 1).replace('"', '');
-
-        requestConsole.innerHTML = requestText;
-        responseConsole.innerHTML = responseText;
-        queryConsole.innerHTML = queryText;
+    private getDescription(request: IServerSideGetRowsRequest, type: DescriptionType): string {
+        return `Loading rows ${request.startRow} to ${request.endRow} as a result of - ${type}`;
     }
 }
