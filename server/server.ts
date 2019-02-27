@@ -5,7 +5,7 @@ import * as express from 'express';
 import * as bodyParser from 'body-parser';
 import { Request, Response } from 'express';
 
-import OlympicWinnersService from './olympicWinnersService';
+import OlympicWinnersService from './services/olympicWinnersService';
 
 const app = express();
 
@@ -19,8 +19,14 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
 app.post('/olympicWinners', function (req: Request, res: Response) {
-    OlympicWinnersService.getData(req.body, (rows: any[], lastRow: number, query: string) => {
+    OlympicWinnersService.getRows(req.body, (rows: any[], lastRow: number, query: string) => {
         res.json({rows: rows, lastRow: lastRow, query: query});
+    });
+});
+
+app.post('/olympicWinners/new', function (req: Request, res: Response) {
+    OlympicWinnersService.addRow(req.body, () => {
+        res.status(200).send();
     });
 });
 

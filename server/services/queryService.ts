@@ -1,34 +1,12 @@
-import * as mysql from 'mysql';
-
-const connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: 'password'
-});
-
-connection.connect((err) => {
-    if(err) {
-        throw err;
-    }
-    console.log('db connection established');
-})
-
-class OlympicWinnersService {
-
-    getData(request, resultsCallback) {
-
-        const SQL = this.buildSql(request);
-        
-
-        connection.query(SQL, (error, results) => {
-            const rowCount = this.getRowCount(request, results);
-            const resultsForPage = this.cutResultsToPageSize(request, results);
-
-            resultsCallback(resultsForPage, rowCount, SQL);
-        });
+export class QueryService {
+    
+    public static addRowSql(data): string {
+        console.log(data);
+        const values = `'${data.athlete}','${data.country}',${data.year},'${data.sport}',${data.gold},${data.silver},${data.bronze}`;
+        return 'INSERT INTO sample_data.olympic_winners (athlete,country,year,sport,gold,silver,bronze) VALUES(' + values + ');';
     }
 
-    buildSql(request) {
+    public static getRowsSql(request): string {
 
         const selectSql = this.createSelectSql(request);
         const fromSql = ' FROM sample_data.olympic_winners ';
@@ -45,7 +23,7 @@ class OlympicWinnersService {
         return SQL;
     }
 
-    createSelectSql(request) {
+    private static createSelectSql(request): string {
         const rowGroupCols = request.rowGroupCols;
         const valueCols = request.valueCols;
         const groupKeys = request.groupKeys;
@@ -66,7 +44,7 @@ class OlympicWinnersService {
         return ' select *';
     }
 
-    createFilterSql(key, item) {
+    private static createFilterSql(key, item): string {
         switch (item.filterType) {
             case 'text':
                 return this.createTextFilterSql(key, item);
@@ -77,7 +55,7 @@ class OlympicWinnersService {
         }
     }
 
-    createNumberFilterSql(key, item) {
+    private static createNumberFilterSql(key, item): string {
         switch (item.type) {
             case 'equals':
                 return key + ' = ' + item.filter;
@@ -99,7 +77,7 @@ class OlympicWinnersService {
         }
     }
 
-    createTextFilterSql(key, item) {
+    private static createTextFilterSql(key, item): string {
         switch (item.type) {
             case 'equals':
                 return key + ' = "' + item.filter + '"';
@@ -119,7 +97,7 @@ class OlympicWinnersService {
         }
     }
 
-    createWhereSql(request) {
+    private static createWhereSql(request): string {
         const rowGroupCols = request.rowGroupCols;
         const groupKeys = request.groupKeys;
         const filterModel = request.filterModel;
@@ -149,7 +127,7 @@ class OlympicWinnersService {
         }
     }
 
-    createGroupBySql(request) {
+    private static createGroupBySql(request): string {
         const rowGroupCols = request.rowGroupCols;
         const groupKeys = request.groupKeys;
 
@@ -166,7 +144,7 @@ class OlympicWinnersService {
         }
     }
 
-    createOrderBySql(request) {
+    private static createOrderBySql(request): string {
         const rowGroupCols = request.rowGroupCols;
         const groupKeys = request.groupKeys;
         const sortModel = request.sortModel;
@@ -196,36 +174,18 @@ class OlympicWinnersService {
         }
     }
 
-    isDoingGrouping(rowGroupCols, groupKeys) {
-        // we are not doing grouping if at the lowest level. we are at the lowest level
-        // if we are grouping by more columns than we have keys for (that means the user
-        // has not expanded a lowest level group, OR we are not grouping at all).
-        return rowGroupCols.length > groupKeys.length;
-    }
-
-    createLimitSql(request) {
+    private static createLimitSql(request): string {
         const startRow = request.startRow;
         const endRow = request.endRow;
         const pageSize = endRow - startRow;
         return ' limit ' + (pageSize + 1) + ' offset ' + startRow;
     }
 
-    getRowCount(request, results) {
-        if (results === null || results === undefined || results.length === 0) {
-            return null;
-        }
-        const currentLastRow = request.startRow + results.length;
-        return currentLastRow <= request.endRow ? currentLastRow : -1;
+    private static isDoingGrouping(rowGroupCols, groupKeys): boolean {
+        // we are not doing grouping if at the lowest level. we are at the lowest level
+        // if we are grouping by more columns than we have keys for (that means the user
+        // has not expanded a lowest level group, OR we are not grouping at all).
+        return rowGroupCols.length > groupKeys.length;
     }
 
-    cutResultsToPageSize(request, results) {
-        const pageSize = request.endRow - request.startRow;
-        if (results && results.length > pageSize) {
-            return results.splice(0, pageSize);
-        } else {
-            return results;
-        }
-    }
 }
-
-export default new OlympicWinnersService();

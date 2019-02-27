@@ -5,16 +5,19 @@ import "ag-grid-community/dist/styles/ag-grid.css";
 import "ag-grid-community/dist/styles/ag-theme-balham.css";
 import { DataService } from './services/DataService';
 import { TerminalManager, HistoryItem, DescriptionType } from './TerminalManager';
+import { ControlPanel } from './ControlPanel';
 
 export class ServerGrid {
     private gridOptions: GridOptions = {};
     private dataService: DataService;
     private terminal: TerminalManager;
+    private controlPanel: ControlPanel;
     private lastEvent: DescriptionType;
 
     constructor(selector: string) {
-        this.dataService = new DataService(this.processRequestCb.bind(this));
+        this.dataService = new DataService(this.processRequest.bind(this), this.operationComplete.bind(this));
         this.terminal = new TerminalManager();
+        this.controlPanel = new ControlPanel(this.addRow.bind(this));
 
         this.gridOptions = this.createGridOpts();
 
@@ -80,7 +83,7 @@ export class ServerGrid {
         ];
     }
 
-    private processRequestCb(request: IServerSideGetRowsRequest, response: any) {
+    private processRequest(request: IServerSideGetRowsRequest, response: any): void {
         const item: HistoryItem = {
             request,
             response,
@@ -88,5 +91,15 @@ export class ServerGrid {
         };
         this.terminal.pushItem(item);
         this.lastEvent = null;
+    }
+
+    private addRow(data: any): void {
+        this.dataService.addRow(data);
+    }
+
+    private operationComplete(response: any): void {
+        // prompt get rows here
+        console.log('operation complete', response);
+        this.gridOptions.api.purgeServerSideCache();
     }
 }

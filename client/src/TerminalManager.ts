@@ -56,7 +56,7 @@ export class TerminalManager {
     private populateTerminal(item: HistoryItem) {
         this.descriptionEl.innerText = this.getDescription(item.request, item.descriptionType);
         this.queryEl.innerText = JSON.stringify(item.response.query, null, 1).replace('"', '');
-        this.requestEl.innerText = JSON.stringify(item.request, null, 1).replace(',', '\n');
+        this.requestEl.innerText = JSON.stringify(item.request, null, 1);
         this.responseEl.innerText = JSON.stringify(item.response, null, 1);
     }
 

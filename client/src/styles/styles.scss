@@ -6,11 +6,7 @@ body {
 }
 
 h2 {
-    font-size: 16px;
-    font-family: 'Courier New', Courier, monospace;
-    color: white;
     margin: 0;
-    margin-bottom: 5px;
 }
 
 pre {
@@ -26,12 +22,33 @@ pre {
 
 #myGrid {
     height: 60%;
+    width: 70%;
+    float: left;
+}
+
+#controlPanel {
+    height: 60%;
+    width: 30%;
+    float: left;
+
+    button {
+        font-size: 16px;
+    }
 }
 
 #serverConsole {
     background-color: black;
     height: 40%;
     font-size: 16px;
+    clear: both;
+
+    h2 {
+        color: white;
+        font-size: 16px;
+        font-family: 'Courier New', Courier, monospace;
+        margin: 0;
+        margin-bottom: 5px;
+    }
 
     .window {
         box-sizing: border-box;
