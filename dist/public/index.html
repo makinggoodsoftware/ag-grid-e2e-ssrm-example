@@ -1,15 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <style>
-        html, body {
-            height: 99%;
-        }
-    </style>
 </head>
 
 <body>
-    <div id="myGrid" class="ag-theme-balham" style="height: 100%"></div>
+    <div id="container">
+        <div id="myGrid" class="ag-theme-balham"></div>
+        <div id="controlPanel">
+            <div>
+                <h2>Add a new Row</h2>
+                <input id="countryInput" type="text" value="Unkited Gates" placeholder="Country"/>
+                <input id="athleteInput" type="text" value="Michell Phelipsus" placeholder="Athlete"/>
+                <input id="sportInput" type="text" value="Flying Over the Moon" placeholder="Sport"/>
+                <input id="yearInput" type="text" value="0902" placeholder="Year"/>
+                <input id="goldInput" type="text" value="1000" placeholder="Gold"/>
+                <input id="silverInput" type="text" value="2000" placeholder="Silver"/>
+                <input id="bronzeInput" type="text" value="3000" placeholder="Bronze"/>
+                <button id="addRow">Add Row</button>
+            </div>
+        </div>
+        <div id="serverConsole">
+            <div id="leftPanel">
+                <h2>HISTORY</h2>
+                <div class='button-viewport'>
+                </div>
+            </div>
+            <div id="rightPanel">
+                <div class= "window" id="descriptionInfo">
+                    <h2>DESCRIPTION:</h2>
+                    <p></p>
+                </div>
+                <div class= "window" id="queryInfo">
+                    <h2>QUERY INFO: </h2>
+                    <pre></pre>
+                </div>
+                <div class= "window" id="requestInfo">
+                    <h2>REQUEST PARAMETERS</h2>
+                    <pre></pre>
+                </div>
+                <div class= "window" id="responseInfo">
+                    <h2>RESPONSE DATA</h2>
+                    <pre></pre>
+                </div> 
+            </div>
+        </div>
+    </div>
 <script type="text/javascript" src="main.bundle.js"></script></body>
 
 </html>

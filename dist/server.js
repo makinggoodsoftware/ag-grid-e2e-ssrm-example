@@ -5,7 +5,7 @@ const webpackMiddleware = require("webpack-dev-middleware");
 const webpackConfig = require("../webpack.config.js");
 const express = require("express");
 const bodyParser = require("body-parser");
-const olympicWinnersService_1 = require("./olympicWinnersService");
+const olympicWinnersService_1 = require("./services/olympicWinnersService");
 const app = express();
 if (process.env.NODE_ENV === 'development') {
     app.use(webpackMiddleware(webpack(webpackConfig)));
@@ -16,8 +16,13 @@ else {
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.post('/olympicWinners', function (req, res) {
-    olympicWinnersService_1.default.getData(req.body, (rows, lastRow) => {
-        res.json({ rows: rows, lastRow: lastRow });
+    olympicWinnersService_1.default.getRows(req.body, (rows, lastRow, query) => {
+        res.json({ rows: rows, lastRow: lastRow, query: query });
+    });
+});
+app.post('/olympicWinners/new', function (req, res) {
+    olympicWinnersService_1.default.addRow(req.body, () => {
+        res.status(200).send();
     });
 });
 app.listen(4000, () => {
