@@ -11,15 +11,26 @@ This Demo uses **NodeJS + Express, mySQL and Typescript** to perform server-side
 - Sorting
 
 ## Prerequisites
-You will need to have mySQL shell installed on your machine.
 
-[https://dev.mysql.com/downloads/shell/](https://dev.mysql.com/downloads/shell/)
+You will need to have [mySQL](https://dev.mysql.com/downloads/shell/) installed on your machine.
 
-Or alternatively (and for an easier setup), you can use homebrew.
+For an easy set up, with walkthrough instructions here - you can use homebrew.
 
 [https://brew.sh/](https://brew.sh/)
 
 `brew install mysql`
+
+Once this has complete, you will be prompted with some configuration options.
+
+Run the following
+
+`mysql_secure_installation`
+
+You will now be prompted to set a password for the root user. The default configuration for this repo will try to connect with user 'root', and password 'password'. You can change these in the code later or use the same configuration.
+
+A few more prompts will be made. The options you select are up to you, although you should select **YES** on the following: 
+
+`Reload privilege tables now? (Press y|Y for Yes, any other key for No)`
 
 ## Usage
 
