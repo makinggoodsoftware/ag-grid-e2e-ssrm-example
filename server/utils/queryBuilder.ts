@@ -1,10 +1,4 @@
 export class QueryBuilder {
-    
-    public static addRowSql(data): string {
-        console.log(data);
-        const values = `'${data.athlete}','${data.country}',${data.year},'${data.sport}',${data.gold},${data.silver},${data.bronze}`;
-        return 'INSERT INTO sample_data.olympic_winners (athlete,country,year,sport,gold,silver,bronze) VALUES(' + values + ');';
-    }
 
     public static getRowsSql(request): string {
 

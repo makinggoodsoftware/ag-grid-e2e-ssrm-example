@@ -29,15 +29,6 @@ export class OlympicWinnersService {
         });
     }
 
-    public addRow(data, callback: Function): void {
-        const SQL = QueryBuilder.addRowSql(data);
-
-        connection.query(SQL, (error, results) => {
-            console.log(error, results);
-            callback();
-        });
-    }
-
     private getRowCount(request, results): number {
         if (results === null || results === undefined || results.length === 0) {
             return null;

@@ -2,22 +2,9 @@ import {IServerSideGetRowsParams, IServerSideDatasource} from 'ag-grid-community
 
 export class DataService implements IServerSideDatasource {
     private processCallback: Function;
-    private operationCompleteCallback: Function;
 
-    constructor(processCallback: Function, operationCompleteCallback: Function) {
+    constructor(processCallback: Function) {
         this.processCallback = processCallback;
-        this.operationCompleteCallback = operationCompleteCallback;
-    }
-
-    public addRow(data: any) {
-        fetch('./olympicWinners/new', {
-            method: 'post',
-            body: JSON.stringify(data),
-            headers: {"Content-Type": "application/json; charset=utf-8"}
-        })
-        .then(response => {
-            this.operationCompleteCallback(response);
-        });
     }
 
     public getRows(params: IServerSideGetRowsParams): void {

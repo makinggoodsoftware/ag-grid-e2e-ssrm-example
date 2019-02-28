@@ -25,12 +25,6 @@ app.post('/olympicWinners', function (req: Request, res: Response) {
     });
 });
 
-app.post('/olympicWinners/new', function (req: Request, res: Response) {
-    OlympicWinnersService.addRow(req.body, () => {
-        res.status(200).send();
-    });
-});
-
 app.listen(port, () => {
     console.log('Started on localhost:' + port);
 });
