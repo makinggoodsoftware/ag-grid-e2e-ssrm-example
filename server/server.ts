@@ -8,6 +8,7 @@ import { Request, Response } from 'express';
 import OlympicWinnersService from './services/olympicWinnersService';
 
 const app = express();
+const port = process.env.PORT || 4000;
 
 if(process.env.NODE_ENV === 'development') {
     app.use(webpackMiddleware(webpack(webpackConfig)));
@@ -30,6 +31,6 @@ app.post('/olympicWinners/new', function (req: Request, res: Response) {
     });
 });
 
-app.listen(process.env.PORT || 4000, () => {
-    console.log('Started on localhost:4000');
+app.listen(port, () => {
+    console.log('Started on localhost:' + port);
 });
