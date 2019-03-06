@@ -8,7 +8,7 @@ export class DataService implements IServerSideDatasource {
     }
 
     public getRows(params: IServerSideGetRowsParams): void {
-        console.log('Getting Rows: ', JSON.stringify(params.request, null, 1));
+        // console.log('Getting Rows: ', JSON.stringify(params.request, null, 1));
 
         fetch('./olympicWinners/', {
             method: 'post',

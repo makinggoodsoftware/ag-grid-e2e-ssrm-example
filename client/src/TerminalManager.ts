@@ -7,6 +7,7 @@ export interface HistoryItem {
 }
 
 export enum DescriptionType {
+    Page = "Paginate",
     Scroll = "Scroll",
     Sort = "Sort Changed",
     Filter = "Filter Changed",
@@ -42,7 +43,8 @@ export class TerminalManager {
 
     private addHistoryButton(item: HistoryItem) {
         const btn = document.createElement('button');
-        btn.innerText = item.descriptionType;
+        btn.innerText = item.descriptionType + ' (' + (this.history.length) + ')';
+        this.history.push(item);
         btn.classList.add('new');
 
         btn.addEventListener('click', () => {
@@ -62,5 +64,14 @@ export class TerminalManager {
 
     private getDescription(request: IServerSideGetRowsRequest, type: DescriptionType): string {
         return `Loading rows ${request.startRow} to ${request.endRow} as a result of - ${type}`;
+    }
+
+    public reset(): void {
+        this.history = [];
+        this.descriptionEl.innerText = null;
+        this.queryEl.innerText = null;
+        this.requestEl.innerText = null;
+        this.responseEl.innerText = null;
+        this.historyViewport.innerHTML = null;
     }
 }
