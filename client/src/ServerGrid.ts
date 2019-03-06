@@ -170,11 +170,6 @@ export class ServerGrid {
 
     private createColumnDefs(): any[] {
         return [
-            {
-                headerName: 'Row Index', valueGetter: (params) => {
-                    return params.node.rowIndex;
-                }
-            },
             { field: 'athlete', filter: 'text' },
             { field: 'country', rowGroup: true, hide: true },
             { field: 'sport', rowGroup: true, hide: true },
