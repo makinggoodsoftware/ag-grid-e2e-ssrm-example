@@ -14,15 +14,17 @@ This Demo uses **NodeJS + Express, mySQL and Typescript** to perform server-side
 
 You will need to have [mySQL](https://dev.mysql.com/downloads/shell/) installed on your machine.
 
-For an easy set up, with walkthrough instructions here - you can use homebrew.
+For an easy set up on a mac, you can use homebrew.
 
 [https://brew.sh/](https://brew.sh/)
 
 `brew install mysql`
 
-Once this has complete, you will be prompted with some configuration options.
+Once this is complete, you will need to turn on the mySQL service.
 
-Run the following
+`brew services start mysql`
+
+after this, run the following command:
 
 `mysql_secure_installation`
 
@@ -34,30 +36,52 @@ A few more prompts will be made. The options you select are up to you, although 
 
 ## Usage
 
-Once you have installed mySQL, you will need to create and populate the sample database on your local machine. In your terminal, run the following commands
+Once you have installed mySQL, you will need to create and populate the sample database on your local machine. In your terminal, run the following commands:
 
 ```
 mysql -u root -p
-// You may be prompted for password here
+// You will be prompted for your password here
+```
 
+Next, you will need to reconfigure the the authentication method used for the root (or any other) MySQL account with the following code: 
+
+```
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password';
+```
+Note that if you used a different account to root, you can change the `'root'`, `'localhost'` & `'password'` accordingly. 
+
+Following this, run:
+
+```
+FLUSH PRIVILEGES;
+```
+to complete the process. 
+
+Next you will need to create a database to hold the data which will be used by our grid: 
+
+```
 CREATE DATABASE sample_data;
 ```
-Now your database should be prepared, ready for population.
-Navigate to the root of the project, and run
 
-````
+Now your database should be prepared, ready for population.
+Exit MySQL (control+d) and go to the root directory of the project, then run:
+
+```
 mysql -u root -p -D sample_data < ./data/olympic_winners.sql
-````  
+``` 
 
 Your `sample_data` database will have an "olympic_winners" table created, and populated with the data provided by `~/data/olympic_winners.sql` .
 
-To install dependencies, run 
+In this tutorial we will assume that you do not have yarn installed globally, so we will install it locally and run it accordingly:
 
-`yarn install`
+`npm i yarn`
+
+then run 
+`./node_modules/yarn/bin/yarn`
 
 Now you should configure your mySQL credentials for the application to connect.
 
-In `~/server/olympicWinnersService.ts`, input your mySQL username and password in the following (line: 3)
+In `~/server/services/olympicWinnersService.ts`, input your mySQL username and password in the following (line: 4)
 
 ```
 const connection = mysql.createConnection({
@@ -69,7 +93,7 @@ const connection = mysql.createConnection({
 
 ### Dev environment
 
-`yarn dev`
+`./node_modules/yarn/bin/yarn dev`
 
 Navigate to http://localhost:4000 to view the project.
 
